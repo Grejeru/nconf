@@ -1054,7 +1054,7 @@ function db_handler($query, $output = "result", $debug_title = "query"){
                 case "result":
                     $return = $result;
                     # DEBUG output with new API module:
-                    $debug_data_result  = NConf_HTML::text('<b>Result:</b>'.$return);
+                    $debug_data_result  = NConf_HTML::text('<b>Result:</b>(mysqli_result object)');
                     break;
                 
                 case "query":
