@@ -110,7 +110,7 @@ if (AUTH_TYPE == "file"){
         # Connect to external database if given
         if ( defined("AUTH_DBNAME") ){
             # if AUTH config is given, use it
-            $auth_db_link = mysql_connect(AUTH_DBHOST,AUTH_DBUSER, AUTH_DBPASS, TRUE);
+            $auth_db_link = mysql_connect(AUTH_DBHOST,AUTH_DBUSER, AUTH_DBPASS);
             mysql_select_db(AUTH_DBNAME, $auth_db_link);
             $result = db_handler($sqlquery, 'getOne', "Authentication by sql");
             mysql_close($auth_db_link);
