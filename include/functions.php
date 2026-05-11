@@ -60,13 +60,6 @@ function message($LEVEL, $text, $mode = "standard"){
 
 
 function escape_string($string){
-    # Strip slashes if magic_quotes_gpc is ON (DEPRECATED as of PHP 5.3.0 and REMOVED as of PHP 6.0.0.)
-    # Reverse magic_quotes_gpc/magic_quotes_sybase effects on those vars if ON.
-    if (get_magic_quotes_gpc() ){
-        message('DEBUG', "magic_quotes_gpc is ON: using stripslashes to correct it");
-        $string = stripslashes($string);
-    }
-    
     # Make a safe string
     $escaped_string = mysql_real_escape_string($string);
     return $escaped_string;
@@ -1249,7 +1242,8 @@ function add_attribute($id, $id_attr, $attr_value){
             $attr_datatype = db_templates("attr_datatype", $attr["key"]);
 
             # save assign_one/assign_many/assign_cust_order in ItemLinks
-            while ( $many_attr = each($attr["value"]) ){
+            foreach ( $attr["value"] as $__many_attr_k => $__many_attr_v ){
+                $many_attr = ["key" => $__many_attr_k, "value" => $__many_attr_v];
                 # if value is empty go to next one
                 if (!$many_attr["value"]){
                     continue;
