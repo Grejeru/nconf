@@ -57,7 +57,7 @@ abstract class NConf_Deployment_Modules
             
 
             // add status to history log
-            NConf_Deployment::history($destination["title"], $status);
+            $this->history($destination["title"], $status);
         }
     }
 
@@ -147,6 +147,14 @@ abstract class NConf_Deployment_Modules
             // no host, or just one defined
             // add it to the module
             $this->add_host($config);
+        }
+    }
+
+    public function history($message, $status){
+        if($status === TRUE){
+            history_add('module', 'deploy '.$this->name, $message.' (OK)');
+        }else{
+            history_add('module', 'deploy '.$this->name, $message.' (FAILED)');
         }
     }
 
